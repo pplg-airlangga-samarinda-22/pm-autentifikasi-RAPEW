@@ -45,6 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="password" name="password" id="password" required>
         </div>
         <button type="submit">Login</button>
+        <br>
+        <a href="../login.php">LOGIN MASYARAKAT</a>
     </form>
 </body>
 

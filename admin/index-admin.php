@@ -16,7 +16,7 @@
     <nav>
         <a href="index.php">Dashboard</a>
         <a href="tambah-petugas.php">Tambah Petugas</a>
-        <a href="verifikasi.php">Verifikasi</a>
+        <a href="verifikasi.php">Verifikasi dan Validasi</a>
         <a href="tanggapan.php">Tanggapan</a>
         <a href="logout.php">Logout</a>
     </nav>

@@ -1,33 +1,45 @@
+<?php
+session_start();
+require "koneksi.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>Registrasi</title>
+    <title>Pengaduan</title>
 </head>
+
 <body>
-    <h1>Registrasi Pengguna Baru</h1>
-    <form action="" method="post">
-        <div class="form-item">
-            <label for="nik">NIK</label>
-            <input type="text" name="nik" id="nik">
-        </div>
-        <div class="form-item">
-            <label for="name">Nama Lengkap</label>
-            <input type="text" name="nama" id="nama">
-        <div>
-        <div class="form-item">
-            <label for="telepon">Telepon</label>
-            <input type="tel" name="telepon" id="telepon">
-        </div>
-        <div class="form-item">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="Username">
-        </div>
-        <div class="form-item">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password">
-        </div>
-        <button type="submit">Register</button>
-    </form>
-    <a href="login.php">Batal</a>
+    <h1>Halaman Pengaduan</h1>
+    <a href="form-aduan.php">Tambah</a>
+    <a href="index.php">Kembali</a>
+    <table>
+        <thead>
+            <th>No</th>
+            <th>Tanggal</th>
+            <th>Laporan</th>
+            <th>Status</th>
+            <th>Aksi</th>
+        </thead>
+        <tbody>
+            <?php
+            $nik = $_SESSION['nik'];
+            $no = 0 ;
+            $sql = "SELECT * FROM pengaduan WHERE nik=? order by id_pengaduan desc";
+            $pengaduan = $koneksi->execute_query($sql, [$nik])->fetch_all(MYSQLI_ASSOC);
+            foreach ($pengaduan as $item) {
+            ?>
+                <tr>
+                    <td><? ++$no; ?></td>
+                    <td><?= $item['tgl_pengaduan']; ?></td>
+                    <td><?= $item['isi_laporan'] ?></td>
+                    <td><?= ($item['status'] == '0') ? 'menunggu' : (($item['status'] == 'proses') ? 'diproses' : 'selesai') ?></td>
+                    <td><a href='edit-aduan.php?id=<?= $item['id_pengaduan'] ?>'>Edit</a></td>
+                </tr>
+            <?php
+            }
+            ?>
+        </tbody>
+    </table>
 </body>
-</html>

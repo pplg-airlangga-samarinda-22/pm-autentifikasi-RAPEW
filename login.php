@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>Silahkan Login</p>
         <div class="form-item">
             <label for="nik">NIK</label>
-            <input type="text" name="nik" id="nik" required>
+            <input type="number" name="nik" id="nik" required>
         </div>
         <div class="form-item">
             <label for="username">Username</label>
@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="password" name="password" id="password" required>
         </div>
         <button type="submit">Login</button>
+        <br>
         <a href="register.php">Register</a>
         <br>
         <a href="admin/login.php"> Login Sebagai Administrator / Petugas </a>

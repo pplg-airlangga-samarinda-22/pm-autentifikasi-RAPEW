@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     <form action="" method="post">
         <div class="form-item">
             <label for="nik">NIK</label>
-            <input type="text" name="nik" id="nik">
+            <input type="number" name="nik" id="nik">
         </div>
         <div class="form-item">
             <label for="name">Nama Lengkap</label>
