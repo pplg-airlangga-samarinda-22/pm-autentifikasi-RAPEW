@@ -1,52 +1,57 @@
 <?php
 require "../koneksi.php";
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = md5($_POST['password']);
 
+    $sql = "SELECT * FROM petugas WHERE username='$username' AND password='$password'";
+    $result = mysqli_query($koneksi, $sql);
 
-    // fungsi execute_query hanya bisa digunakan pada PHP 8.2
-    $sql = "SELECT * FROM petugas WHERE username=? AND password=?";
-    $row = $koneksi->execute_query($sql, [$username, $password]);
+    if (mysqli_num_rows($result) == 1) {
 
-    if (mysqli_num_rows($row) == 1) {
-        $user = mysqli_fetch_assoc($row);
         session_start();
+        $user = mysqli_fetch_assoc($result);
+
+        $_SESSION['level'] = $user['level'];
         $_SESSION['username'] = $username;
-        if ($user['level'] === 'admin') {
-            header("location:index-admin.php");
-        } elseif ($user['level'] === 'petugas') {
-            header("location:index-petugas.php");
+        $_SESSION['id_petugas'] = $user['id_petugas'];
+
+        if ($_SESSION['level'] == 'admin') {
+            header("location: index-admin.php");
+            exit();
+        } elseif ($_SESSION['level'] == 'petugas') {
+            header("location: index-admin.php");
+            exit();
         }
     } else {
-        echo "<script>alert('Gagal Login!')</script>";
+        echo "<script>alert('Gagal Login! Username atau Password salah.');</script>";
     }
-    
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 
 <body>
     <form action="" method="post" class="form-login">
-    <h4 class="text-center">LOGIN ADMIN / PETUGAS</h4>
         <p>Silahkan Login</p>
         <div class="form-item">
             <label for="username">Username</label>
             <input type="text" name="username" id="username" required>
         </div>
-        <div class="form.item">
+        <div class="form-item">
             <label for="password">Password</label>
             <input type="password" name="password" id="password" required>
         </div>
         <button type="submit">Login</button>
-        <br>
-        <a href="../login.php">LOGIN MASYARAKAT</a>
     </form>
 </body>
 

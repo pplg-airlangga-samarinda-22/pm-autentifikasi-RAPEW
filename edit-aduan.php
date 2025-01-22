@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
     $tanggal = date('y-m-d');
     $id_pengaduan = $_GET["id"];
     $laporan = $_POST["laporan"];
-    $foto = (isset($_FILES['foto']))?$_files['foto']['name']:"";
+    $foto = (isset($_FILES['foto'])) ? $_files['foto']['name']:"";
 
     $sql = "UPDATE pengaduan SET tgl_pengaduan=?, isi_laporan=?, foto=? WHERE id_pengaduan=?";
     $row = $koneksi->execute_query($sql, [$tanggal, $laporan, $foto, $id_pengaduan]);

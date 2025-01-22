@@ -9,15 +9,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Pelaporan Pengaduan</title>
+    <title>Admin Pengaduan</title>
 </head>
 <body>
-    <h1>Selamat Datang di Aplikasi Pengaduan Masyarakat (ADMIN) </h1>
+    <h1>Selamat Datang di sistem pengaduan masyarakat </h1>
     <nav>
-        <a href="index.php">Dashboard</a>
-        <a href="tambah-petugas.php">Tambah Petugas</a>
-        <a href="verifikasi.php">Verifikasi dan Validasi</a>
-        <a href="tanggapan.php">Tanggapan</a>
+        <a href="index-admin.php">Dashboard</a>
+        <a href="../pengaduan/pengaduan.php">Pengaduan</a>
+        <a href="../masyarakat/masyarakat.php">Masyarakat</a>
+        
+        <?php if ($_SESSION['level'] === 'admin') { ?>
+            <a href="../petugas/petugas.php">Petugas</a>
+        <?php } ?>
+
+        <a href="../laporan.php">laporan</a>
         <a href="logout.php">Logout</a>
     </nav>
 </body>
